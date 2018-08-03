@@ -16,10 +16,10 @@ class TwitterAccount(models.Model):
     twitter_handle = models.CharField(max_length=300)
 
     def __unicode__(self):
-        return self.title
+        return self.twitter_handle
 
     def __str__(self):
-        return self.title
+        return self.twitter_handle
 
     # TODO -> Get the slug working
     # def get_absolute_url(self):

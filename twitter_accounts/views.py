@@ -36,5 +36,8 @@ class CreateTwitterAccountView(FormView):
     # TODO -> Is there anything else that we want to do if the form is not valid??
     # TODO Think that I will need to save and commit the form here?? Does it do it itself? probably not
     def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.owned_by = self.request.user
+        instance.save()
         messages.success(self.request, 'Your Twitter account has been added successfully')
         return super().form_valid(form)
