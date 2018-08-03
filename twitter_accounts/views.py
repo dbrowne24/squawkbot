@@ -7,14 +7,14 @@ from twitter_accounts.forms import TwitterAccountForm
 from bot_tasks.models import BotTask
 
 
-def home(request):
-    title = 'Welcome to Tweet Cheat!'
-
-    context = {
-        'title': title
-    }
-
-    return render(request, 'twitter_accounts/home.html', context)
+# def home(request):
+#     title = 'Welcome to Tweet Cheat!'
+#
+#     context = {
+#         'title': title
+#     }
+#
+#     return render(request, 'twitter_accounts/home.html', context)
 
 
 class HomeView(ListView):
@@ -27,14 +27,12 @@ class HomeView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
-
+        return context
 
     def get_queryset(self, *args, **kwargs):
         # Filter by the user
         queryset = TwitterAccount.objects.all()
         return queryset
-
-
 
 
 class CreateTwitterAccountView(FormView):
@@ -48,5 +46,5 @@ class CreateTwitterAccountView(FormView):
     # TODO -> Is there anything else that we want to do if the form is not valid??
     # TODO Think that I will need to save and commit the form here?? Does it do it itself? probably not
     def form_valid(self, form):
-        messages.success('Your Twitter account has been added successfully')
+        messages.success(self.request, 'Your Twitter account has been added successfully')
         return super().form_valid(form)
