@@ -7,16 +7,6 @@ from twitter_accounts.forms import TwitterAccountForm
 from bot_tasks.models import BotTask
 
 
-# def home(request):
-#     title = 'Welcome to Tweet Cheat!'
-#
-#     context = {
-#         'title': title
-#     }
-#
-#     return render(request, 'twitter_accounts/home.html', context)
-
-
 class HomeView(ListView):
     """
     The home view should show a list of the users accounts
@@ -30,7 +20,7 @@ class HomeView(ListView):
         return context
 
     def get_queryset(self, *args, **kwargs):
-        # Filter by the user
+        # TODO Filter by the user
         queryset = TwitterAccount.objects.all()
         return queryset
 

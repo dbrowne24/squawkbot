@@ -22,7 +22,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('', include('twitter_accounts.urls'))
+    path('', include('twitter_accounts.urls')),
+    path('operations/', include('bot_tasks.urls'))
 ]
 
 if settings.DEBUG:
