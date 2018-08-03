@@ -1,3 +1,8 @@
 from django.contrib import admin
+from bot_tasks.models import UnfollowNonFollowersTask
 
-# Register your models here.
+bot_tasks_models = [
+    UnfollowNonFollowersTask
+]
+
+admin.site.register(bot_tasks_models)
