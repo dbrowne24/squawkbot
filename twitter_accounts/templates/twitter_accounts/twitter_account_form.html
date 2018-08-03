@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="row">
+  <div class="col-md-8">
+    <h1>Add New Twitter Account</h1>
+    <p>Adding a new twitter account will allow you to perform actions on it using our bot. We do not require your password for this.</p>
+
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        {% render_field form.consumer_key class="form-control" placeholder="Consumer Public Key" %}
+      </div>
+      <div class="form-group">
+        {% render_field form.consumer_secret class="form-control" placeholder="Consumer Private Key" %}
+      </div>
+      <div class="form-group">
+        {% render_field form.access_token class="form-control" placeholder="Access Public Token" %}
+      </div>
+      <div class="form-group">
+        {% render_field form.access_secret class="form-control" placeholder="Access Secret Token" %}
+      </div>
+      <button type="submit" class="btn btn-primary">Add Twitter Account</button>
+    </form>
+  </div>
+
+  <div class="col-md-4">
+    <h2>How does this work?</h2>
+    <p>
+      Follow the instructions <a href='#'>here</a> to get the data that we need.
+    </p>
+    <hr/>
+    <p>
+      The keys here allows our twitter bot to perform actions on your account without you needing to release your
+      password to us. This helps to keep your account secure, while giving our bot the access level that it needs to your
+      twitter account to perform actions such as mass following certain users, unfollowing users that aren't following you.
+      Mass dm'ing users that follow you, etc. Tweet Cheat is basically the social media manager that doesn't come with the 50k /year wage.
+    </p>
+    <hr/>
+    <p>
+      
+    </p>
+  </div>
+</div>
+{% endblock content %}
