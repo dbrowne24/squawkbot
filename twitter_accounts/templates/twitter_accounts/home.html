@@ -1,5 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>{{title}}</h1>
+  <h1>Your Twitter Accounts</h1>
+  {% if twitter_account_list %}
+  {% for twitter_account in twitter_account_list %}
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{twitter_account.twitter_handle}}</h3>
+        <p class="card-text">{{ twitter_account.consumer_key}}</p>
+      </div>
+    </div>
+  {% endfor %}
+
+  {% else %}
+    <p>No twitter accounts found</p>
+  {% endif %}
+
+
+  <h1>Your Recent Operations</h1>
+  {% if bot_tasks %}
+  {% for task in bot_tasks %}
+  {% endfor %}
+  {% endif %}
+
+
 
 {% endblock content %}
