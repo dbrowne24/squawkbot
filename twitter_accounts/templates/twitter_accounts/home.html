@@ -5,8 +5,16 @@
   {% for twitter_account in twitter_account_list %}
     <div class="card">
       <div class="card-body">
-        <h3 class="card-title">{{twitter_account.twitter_handle}}</h3>
-        <p class="card-text">{{ twitter_account.consumer_key}}</p>
+        <h3 class="card-title">@{{twitter_account.twitter_handle}}</h3>
+        <div class="card-body">
+          <p><b>Public Consumer Key: </b> {{ twitter_account.consumer_key }}</p>
+          <p><b>Private Consumer Key: </b> {{ twitter_account.consumer_secret }}</p>
+          <p><b>Public Access Token: </b> {{ twitter_account.access_token }}</p>
+          <p><b>Private Access Token: </b> {{ twitter_account.access_secret }}</p>
+        </div>
+        <a href="{{twitter_accounts.get_create_task_url}}" class="btn btn-primary">New Task</a>
+        <a href="{{twitter_account.get_delete_url}}" class="btn btn-danger">Delete Account</a>
+
       </div>
     </div>
   {% endfor %}

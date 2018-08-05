@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import ListView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import DeleteView, FormView
 from twitter_accounts.models import TwitterAccount
 from twitter_accounts.forms import TwitterAccountForm
 from bot_tasks.models import BotTask
@@ -41,3 +42,8 @@ class CreateTwitterAccountView(FormView):
         instance.save()
         messages.success(self.request, 'Your Twitter account has been added successfully')
         return super().form_valid(form)
+
+
+class TwitterAccountDelete(DeleteView):
+    model = TwitterAccount
+    success_url = reverse_lazy('home')

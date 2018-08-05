@@ -22,6 +22,9 @@ class BotTask(models.Model):
     task_status = models.CharField(max_length=2, choices=TASK_STATUS_CHOICES)
     task_name = models.CharField(max_length=120)
 
+    class Meta:
+        abstract = True
+
     def __unicode__(self):
         return self.task_name
 

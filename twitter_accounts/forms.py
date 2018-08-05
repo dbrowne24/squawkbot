@@ -8,6 +8,7 @@ class TwitterAccountForm(forms.ModelForm):
     class Meta:
         model = TwitterAccount
         fields = [
+            'twitter_handle',
             'consumer_key',
             'consumer_secret',
             'access_token',
