@@ -41,7 +41,7 @@ class TwitterAPI():
         }
 
 
-    def follow_all(self, target):
+    def follow_all(self, target, limit=100):
         """
         Follows all the followers of another user
         """
@@ -55,7 +55,11 @@ class TwitterAPI():
         non_mutual_followers = set(their_followers) - set(following)
 
         # loop through the list and follow the users
+        total_followed = 0
         for f in non_mutual_followers:
+            if total_followed >= limit:
+                print("[+] Reached the limit, stopped following")
+                break
             try:
                 self.api.create_friendship(f)
                 total_followed += 1
@@ -66,6 +70,43 @@ class TwitterAPI():
             except(tweepy.RateLimitError, tweepy.TweepError) as e:
                 error_handling(e)
         print(total_followed)
+
+
+    def follow_keyword(self, keywords, limit, count=5):
+        """
+        Follows the limit number of users for each keyword passed in keywords
+        """
+        print('[+] limit set to: %s' % limit)
+        print('[+] count set to: %s' % count)
+
+        followers = self.followers
+        following = self.following
+
+        for keyword in keywords:
+            # Get the search result
+            search_results = self.api.search(
+                q=keyword,
+                count=count,
+                lang='en'
+            )
+            # TODO We should remove a list of blacklisted users from the searched_screen_names
+            searched_screen_names = [tweet.author._json['screen_name'] for tweet in search_results]
+            # only follows limit of each keyword to avoid non-relevant users
+            print('[+] Following users who tweeted: %s' % keyword)
+            total_followed = 0
+            for i in range(0, len(searched_screen_names) - 1):
+                try:
+                    # follow the user
+                    self.api.create_friendship(searched_screen_names[i])
+                    total_followed += 1
+                    if total_followed % 10 == 0:
+                        print(str(total_followed) + ' users followed so far')
+                    print('[+] Followed a user. Sleeping %s seconds' % SLEEP_TIMEOUT)
+                    sleep(SLEEP_TIMEOUT)
+                except(tweepy.RateLimitError, tweepy.TweepError) as e:
+                    error_handling(e)
+
+            print('[+] Total followed: %s' % total_followed)
 
 
     def unfollow_back(self):
@@ -100,7 +141,7 @@ def error_handling(e):
     model somehow
     """
     error = type(e)
-    if error == weepy.RateLimitError:
+    if error == tweepy.RateLimitError:
         print("[+] You've hit a limit!! Sleeping for %s minutes" % RATE_LIMITING_TIMEOUT)
         sleep(RATE_LIMITING_TIMEOUT)
     if error == tweepy.TweepError:

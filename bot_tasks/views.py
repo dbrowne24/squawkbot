@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import FormView
 
 from bot_tasks.models import (
@@ -23,13 +23,16 @@ class PendingTasks(ListView):
         return queryset
 
 
-class TaskCreateView(FormView):
+class TaskSelectView(TemplateView):
     """
-    If I make this an abstract view and then inherit it in the other views
-    I can then change the form
+    A template view that allows users to select which type of task
+    they want to create.
     """
-    pass
+    template_name = 'bot_tasks/task_to_create.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(TaskSelectView, self).get_context_data(*args, **kwargs)
+        return context
 
-class UnfollowNonFollowersTask(TaskCreateView):
+class CreateUnfollowNonFollowersTask(FormView):
     pass

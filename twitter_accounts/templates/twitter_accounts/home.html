@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
   <h1>Your Twitter Accounts</h1>
+  <hr/>
   {% if twitter_account_list %}
   {% for twitter_account in twitter_account_list %}
     <div class="card">
@@ -12,8 +13,8 @@
           <p><b>Public Access Token: </b> {{ twitter_account.access_token }}</p>
           <p><b>Private Access Token: </b> {{ twitter_account.access_secret }}</p>
         </div>
-        <a href="{{twitter_accounts.get_create_task_url}}" class="btn btn-primary">New Task</a>
-        <a href="{{twitter_account.get_delete_url}}" class="btn btn-danger">Delete Account</a>
+        <a href="{{ twitter_account.get_create_task_url }}" class="btn btn-primary">New Task</a>
+        <a href="{{ twitter_account.get_delete_url }}" class="btn btn-danger">Delete Account</a>
 
       </div>
     </div>
@@ -25,6 +26,7 @@
 
 
   <h1>Your Recent Operations</h1>
+  <hr/>
   {% if bot_tasks %}
   {% for task in bot_tasks %}
   {% endfor %}

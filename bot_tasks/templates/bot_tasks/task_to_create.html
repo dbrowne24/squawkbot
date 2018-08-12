@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+  <!-- Unfollow non followers -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Unfollow Non Followers</h2>
+        <p>This task will unfollow any account that you follow that does not also follow you back.</p>
+        <a href="#" class="btn btn-primary">Create Task</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Follow the followers -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Follow the followers of another account</h2>
+        <p>This task will follow all the accounts that follow a specified account</p>
+        <a href="#" class="btn btn-primary">Create Task</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

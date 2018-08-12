@@ -5,6 +5,7 @@ app_name = 'bot_tasks'
 
 urlpatterns = [
     path('', views.PendingTasks.as_view(), name='pending-tasks'),
-    # TODO -> Need to update this to each individual task..
-    path('<slug:slug>/new_task/', views.TaskCreateView.as_view(), name='task-create')
+    path('<slug:slug>/select_task/', views.TaskSelectView.as_view(), name='task-select'),
+    # TODO -> Each of the individual tasks
+    path('<slug:slug>/new_unfollow_non_followers_task/', views.CreateUnfollowNonFollowersTask.as_view(), name='create-unfollow-non-followers-task')
 ]

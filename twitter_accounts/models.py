@@ -24,15 +24,11 @@ class TwitterAccount(models.Model):
     def __str__(self):
         return self.twitter_handle
 
-    # TODO -> Get the slug working
-    # def get_absolute_url(self):
-    #     return reverse('blog:post-detail', kwargs={'slug':self.slug})
-
     def get_delete_url(self):
         return reverse('twitter_accounts:twitter-account-delete', kwargs={'slug': self.slug })
 
     def get_create_task_url(self):
-        return reverse('bot_tasks:task-create', kwargs={'slug': self.slug })
+        return reverse('bot_tasks:task-select', kwargs={'slug': self.slug })
 
 
 def create_twitter_account_slug(instance, new_slug=None):
